@@ -29,6 +29,7 @@ export default function Login(props) {
     return(
 
         <KeyboardAvoidingView 
+        enabled={true}
         behavior='padding'
         style={styles.container}> 
         
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
         color: 'gray',
         textDecorationLine: 'underline',
         fontWeight: 'bold',
-        marginTop:4,
+        marginTop:7,
     },
 
     forgotPassword: {

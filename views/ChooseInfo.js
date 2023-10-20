@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, Image, Pressable } from 'react-native';
 import logoITEEM from './Login/imgITEEM.png'
+import { SelectList } from 'react-native-dropdown-select-list';
 import { firebase_auth } from '../components/config';
 
 
-export default function Home(props) {
+export default function ChooseInfo(props) {
 
+    const [selected, setSelected] = React.useState("");
   
+    const data = [
+      {key:'1', value:'Mobiles'},
+      {key:'2', value:'Appliances'},
+      {key:'3', value:'Cameras'},
+      {key:'4', value:'Computers'},
+      {key:'5', value:'Vegetables'},
+      {key:'6', value:'Diary Products'},
+      {key:'7', value:'Drinks'},
+  ]
+
 
     return(
 
@@ -19,32 +31,28 @@ export default function Home(props) {
         />
         </View>
 
-        <View style={styles.midContainer}>
-
-        <Pressable style={styles.button} onPress={()=>props.navigation.navigate('ChooseAvaliate')}>
-            <Text style ={styles.buttonText}>Avaliar Desempenho</Text>
-        </Pressable>
-
-        <Pressable style ={styles.button} onPress={()=>props.navigation.navigate('ChooseInfo')}>
-            <Text style ={styles.buttonText}>Informações do Jovem</Text>
-        </Pressable>
-
-        <Pressable style ={styles.button} onPress={()=>props.navigation.navigate('Certificate')}>
-            <Text style ={styles.buttonText}>Gerar Certificado</Text>
-        </Pressable>
-
+        <View style={{marginHorizontal:40}}>
+         <Text style={styles.cabecalhoLogin}>Nome do aluno a ser verificado</Text>   
+        <SelectList 
+        setSelected={setSelected} 
+        data={data}
+        dropdownStyles={{marginLeft:10, marginRight:10}}
+        dropdownItemStyless={{marginHorizontal:10}}
+        />
         </View>
+
+
 
         <View style={styles.bottomContainer}>
 
-        <Pressable style ={styles.text} onPress={()=> firebase_auth.signOut()}>
-            <Text style ={styles.backLogin}>Sair da conta</Text>
+        <Pressable style={styles.button} onPress={()=>props.navigation.navigate('Avaliate')}>
+            <Text style ={styles.buttonText}>Selecionar</Text>
         </Pressable>
 
-        </View>
+
+        </View>      
         
-        
-                  
+                
         </View>
 
        
@@ -66,19 +74,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         justifyContent:"flex-end",
-        marginBottom:20,
+        marginBottom:80,
         width: "100%"
       },
 
       topContainer: {
-          flex: 1,
-          backgroundColor: 'white',
-          justifyContent:"flex-start",
-          alignItems: "flex-end",
-          marginTop: 25,
-          width: "100%"
-          
-      },
+        flex: 1,
+        backgroundColor: 'white',
+        justifyContent:"flex-start",
+        marginBottom: 25, 
+        marginTop: 25,
+        width: "100%"
+        
+    },
   
   
       midContainer: {
@@ -92,13 +100,12 @@ const styles = StyleSheet.create({
         },
 
   
-      imageLogo: {
-          width: 75, 
-          height: 75, 
-          marginRight: 20
-
-          
-      },
+        imageLogo: {
+            width: 275, 
+            height: 250, 
+            alignSelf: 'center', 
+            
+        },
 
   
       button: {
@@ -108,7 +115,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
-        backgroundColor: '#252B4F',
+        backgroundColor: '#98C45A',
         marginRight: 60,
         marginLeft: 60,
         height: 50,
@@ -123,12 +130,6 @@ const styles = StyleSheet.create({
         color: 'white',
       },
 
-      backLogin: {
-        fontSize: 15, 
-        color: 'gray',
-        textDecorationLine: 'underline',
-        fontWeight: 'bold' 
-    },
 
     text: {
         
@@ -141,6 +142,13 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         
     },
+    cabecalhoLogin: {
+        fontSize: 15, 
+        color: 'gray',
+        
+        
+    },
+    
   
 
 
