@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, Image, Pressable } from 'react-native';
+import { SelectList } from 'react-native-dropdown-select-list';
 import logoITEEM from './Login/imgITEEM.png'
 import { firebase_auth } from '../components/config';
 
 
 export default function Home(props) {
+
+  const [selected, setSelected] = React.useState("");
+
+    const data = [
+      {key:'1', value:'Mobiles'},
+      {key:'2', value:'Appliances'},
+      {key:'3', value:'Cameras'},
+      {key:'4', value:'Computers'},
+      {key:'5', value:'Vegetables'},
+      {key:'6', value:'Diary Products'},
+      {key:'7', value:'Drinks'},
+  ]
 
   
 
@@ -21,11 +34,21 @@ export default function Home(props) {
 
         <View style={styles.midContainer}>
 
-        <Pressable style={styles.button} onPress={()=>props.navigation.navigate('ChooseAvaliate')}>
+        <View style={{marginHorizontal:40}}>
+         <Text style={styles.cabecalhoLogin}>Nome do aluno a ser Avaliado</Text>   
+        <SelectList 
+        setSelected={setSelected} 
+        data={data}
+        dropdownStyles={{marginLeft:10, marginRight:10}}
+        dropdownItemStyless={{marginHorizontal:10}}
+        />
+        </View>
+
+        <Pressable style={styles.button} onPress={()=>props.navigation.navigate('Avaliate')}>
             <Text style ={styles.buttonText}>Avaliar Desempenho</Text>
         </Pressable>
 
-        <Pressable style ={styles.button} onPress={()=>props.navigation.navigate('ChooseInfo')}>
+        <Pressable style ={styles.button} onPress={()=>props.navigation.navigate('Info')}>
             <Text style ={styles.buttonText}>Informações do Jovem</Text>
         </Pressable>
 
@@ -125,7 +148,7 @@ const styles = StyleSheet.create({
 
       backLogin: {
         fontSize: 15, 
-        color: 'gray',
+        color: '#262950',
         textDecorationLine: 'underline',
         fontWeight: 'bold' 
     },

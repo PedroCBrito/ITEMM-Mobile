@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   
       backLogin: {
           fontSize: 15, 
-          color: 'gray',
+          color: '#262950',
           textDecorationLine: 'underline',
           fontWeight: 'bold' 
       },

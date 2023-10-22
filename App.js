@@ -6,9 +6,7 @@ import Login from "./views/Login/Login.js";
 import Home from "./views/Home.js";
 import Register from "./views/Register.js";
 import ForgotPassword from "./views/ForgotPassword.js";
-import ChooseAvaliate from "./views/ChooseAvaliate.js";
 import Avaliate from "./views/Avaliate.js";
-import ChooseInfo from "./views/ChooseInfo.js";
 import Info from "./views/Info.js";
 import Certificate from "./views/Certificate.js";
 import { onAuthStateChanged } from 'firebase/auth';
@@ -41,9 +39,7 @@ function App() {
         )}
         <Stack.Screen options={ {title: "", headerTransparent:true}} name="Register" component={Register} />
         <Stack.Screen options={ {title: "", headerTransparent:true}} name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="ChooseAvaliate" component={ChooseAvaliate} />
         <Stack.Screen options={ {title: "", headerTransparent:true}} name="Avaliate" component={Avaliate} />
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="ChooseInfo" component={ChooseInfo} />
         <Stack.Screen options={ {title: "", headerTransparent:true}} name="Info" component={Info} />
         <Stack.Screen options={ {title: "", headerTransparent:true}} name="Certificate" component={Certificate} />     
       </Stack.Navigator>

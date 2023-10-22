@@ -115,7 +115,7 @@ export default function Avaliate(props) {
           <View style={styles.scores}>
 
 
-        <View>
+        <View >
         <Text style={styles.cabecalho}>Háb. Tecnica</Text>   
         <SelectList 
         setSelected={setSelected} 
@@ -271,8 +271,8 @@ const styles = StyleSheet.create({
           justifyContent:"center",
           
           width: "100%",
-          marginBottom: 125,
-          marginTop:170
+          marginBottom: 20,
+          marginTop:50
           
         },
 
@@ -334,7 +334,6 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       fontSize: 14,
       marginHorizontal:40,
-      marginBottom:10,
       padding:17,
       marginTop:8
 
@@ -344,9 +343,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems:'center',
         justifyContent: 'space-between',
-        marginHorizontal:10,
-        marginRight:10,
-        flex: 1,        
+        marginHorizontal:30,
         width: "50%",
       },
 
@@ -360,7 +357,7 @@ const styles = StyleSheet.create({
 
       back: {
         fontSize: 15, 
-        color: 'gray',
+        color: '#262950',
         textDecorationLine: 'underline',
         fontWeight: 'bold' 
     },

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
 
     register: {
         fontSize: 16, 
-        color: 'gray',
+        color: '#262950',
         textDecorationLine: 'underline',
         fontWeight: 'bold',
         marginTop:7,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
-        paddingHorizontal: 32,
+        paddingHorizontal: 2,
         elevation: 3,
         marginRight: 25,
         marginLeft: 25,
