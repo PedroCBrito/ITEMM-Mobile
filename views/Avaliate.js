@@ -4,7 +4,9 @@ import logoITEEM from './Login/imgITEEM.png'
 import { SelectList } from 'react-native-dropdown-select-list';
 import { firebase_auth } from '../components/config';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { or } from 'firebase/firestore';
+import { doc, setDoc } from "firebase/firestore"; 
+
+
 
 
 export default function Avaliate(props) {
@@ -13,6 +15,26 @@ export default function Avaliate(props) {
     const [date, setDate] = useState(new Date());
     const [cruDate, setCruDate] = useState(new Date());
     const [showPicker, setShowPicker] = useState(false);
+    const [participate, setParticipate] = React.useState("");
+    const [relation, setRelation] = React.useState("");
+    const [hability, setHability] = React.useState("");
+    const [metas, setMetas] = React.useState("");
+
+    function createAvaliate(){
+      
+        // Add a new document in collection "cities"
+        setDoc(doc(db, "cities", "LA"), {
+          name: "Los Angeles",
+          state: "CA",
+          country: "USA"
+        });
+
+
+    }
+
+
+
+
 
     const toggleDatePicker = () =>{
       setShowPicker(!showPicker);
@@ -52,12 +74,12 @@ export default function Avaliate(props) {
 
     }
 
-    const [selected, setSelected] = React.useState("");
+    
   
     const data = [
       {key:'1', value:'0'},
       {key:'2', value:'1'},
-      {key:'3', value:'3'},
+      {key:'3', value:'2'},
  
   ]
 
@@ -88,7 +110,7 @@ export default function Avaliate(props) {
         <View>
         <Text style={styles.cabecalho}>Participação</Text>   
         <SelectList 
-        setSelected={setSelected} 
+        setSelected={setParticipate} 
         data={data}
         dropdownStyles={{marginLeft:10, marginRight:10}}
         dropdownItemStyless={{marginHorizontal:10}}
@@ -100,7 +122,7 @@ export default function Avaliate(props) {
         <View>
         <Text style={styles.cabecalho}>Relacionameto</Text>   
         <SelectList 
-        setSelected={setSelected} 
+        setSelected={setRelation} 
         data={data}
         dropdownStyles={{marginLeft:10, marginRight:10}}
         dropdownItemStyless={{marginHorizontal:10}}
@@ -118,7 +140,7 @@ export default function Avaliate(props) {
         <View >
         <Text style={styles.cabecalho}>Háb. Tecnica</Text>   
         <SelectList 
-        setSelected={setSelected} 
+        setSelected={setHability} 
         data={data}
         dropdownStyles={{marginLeft:10, marginRight:10}}
         dropdownItemStyless={{marginHorizontal:10}}
@@ -130,7 +152,7 @@ export default function Avaliate(props) {
         <View>
         <Text style={styles.cabecalho}>Cumprir Metas</Text>   
         <SelectList 
-        setSelected={setSelected} 
+        setSelected={setMetas} 
         data={data}
         dropdownStyles={{marginLeft:10, marginRight:10}}
         dropdownItemStyless={{marginHorizontal:10}}
@@ -330,7 +352,7 @@ const styles = StyleSheet.create({
     placeholder: {
       borderWidth: 1,
       borderColor: 'gray',
-      height: 45,
+      height: 50,
       borderRadius: 8,
       fontSize: 14,
       marginHorizontal:40,
