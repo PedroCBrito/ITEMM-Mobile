@@ -21,27 +21,27 @@ function App() {
 
   const [user, setUser] = useState();
 
-  
-  useEffect(() =>{
-    onAuthStateChanged(firebase_auth, (user)=>{
-    setUser(user);
+
+  useEffect(() => {
+    onAuthStateChanged(firebase_auth, (user) => {
+      setUser(user);
     });
 
-  },[]);
+  }, []);
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {user ? ( 
-        <Stack.Screen options={ {title: "",  headerTransparent:true}} name="Home" component={Home} />
-        ) :(
-         <Stack.Screen options={ {headerTransparent:true, headerShown:false}} name="Login" component={Login} />
+        {user ? (
+          <Stack.Screen options={{ title: "", headerTransparent: true }} name="Home" component={Home} />
+        ) : (
+          <Stack.Screen options={{ headerTransparent: true, headerShown: false }} name="Login" component={Login} />
         )}
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="Register" component={Register} />
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="Avaliate" component={Avaliate} />
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="Info" component={Info} />
-        <Stack.Screen options={ {title: "", headerTransparent:true}} name="Certificate" component={Certificate} />     
+        <Stack.Screen options={{ title: "", headerTransparent: true }} name="Register" component={Register} />
+        <Stack.Screen options={{ title: "", headerTransparent: true }} name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen options={{ title: "", headerTransparent: true }} name="Avaliate" component={Avaliate} />
+        <Stack.Screen options={{ title: "", headerTransparent: true }} name="Info" component={Info} />
+        <Stack.Screen options={{ title: "", headerTransparent: true }} name="Certificate" component={Certificate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   bigRed: {
-       color: 'red',
-       fontWeight: 'bold',
-       fontSize: 30,
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 30,
   },
 });
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, TextInput, StyleSheet, Image, Pressable, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 import logoITEEM from './Login/imgITEEM.png'
 import { firebase_app, firebase_auth } from '../components/config';
-import { collection, doc, getDoc } from 'firebase/firestore';
+
 
 
 
@@ -11,43 +11,50 @@ export default function Home(props) {
 
   const [selected, setSelected] = React.useState("");
   const [users, setUsers] = useState([]);
+  const [selectedName, setSelectedName] = useState("");
   const dbUSers = firebase_app.firestore().collection('usuarios')
+
+  function saveNome() {
+    users.forEach((doc) => {
+      if (doc.key == selected) {
+
+        setSelectedName(doc.value);
+        return
+      } else {
+        return
+      }
+
+    })
+
+
+  }
+
   useEffect(() => {
+
     const ReadData = async () => {
+
       //alert("Hello world foi useeffect");
+
       dbUSers.onSnapshot(
         querySnapshot => {
           const users = []
           querySnapshot.forEach((doc) => {
-            const {nome} = doc.data()
+            const { nome } = doc.data()
             users.push({
               key: doc.id,
               value: nome,
 
             })
           })
-          setUsers(users)
+          setUsers(users);
+
         }
       )
 
-      if (docSnap.exists()) {
-        
-      }
     }
     ReadData();
-  });
 
-
-  const data = [
-    { key: '1', value: 'Mobiles' },
-    { key: '2', value: 'Appliances' },
-    { key: '3', value: 'Cameras' },
-    { key: '4', value: 'Computers' },
-    { key: '5', value: 'Vegetables' },
-    { key: '6', value: 'Diary Products' },
-    { key: '7', value: 'Drinks' },
-  ]
-
+  }), [];
 
 
 
@@ -69,24 +76,27 @@ export default function Home(props) {
         <View style={{ marginHorizontal: 40 }}>
           <Text style={styles.cabecalhoLogin}>Nome do aluno a ser Avaliado</Text>
           <SelectList
+            save='key'
             setSelected={setSelected}
+            onSelect={saveNome}
             data={users}
             dropdownStyles={{ marginLeft: 10, marginRight: 10 }}
             dropdownItemStyless={{ marginHorizontal: 10 }}
           />
         </View>
 
-        <Pressable style={styles.button} onPress={() => props.navigation.navigate('Avaliate')}>
+        <Pressable style={styles.button} onPress={() => props.navigation.navigate('Avaliate', { id: selected, nome: selectedName })}>
           <Text style={styles.buttonText}>Avaliar Desempenho</Text>
         </Pressable>
 
-        <Pressable style={styles.button} onPress={() => props.navigation.navigate('Info')}>
+        <Pressable style={styles.button} onPress={() => props.navigation.navigate('Info', { id: selected, nome: selectedName })}>
           <Text style={styles.buttonText}>Informações do Jovem</Text>
         </Pressable>
 
-        <Pressable style={styles.button} onPress={() => props.navigation.navigate('Certificate')}>
+        <Pressable style={styles.button} onPress={() => props.navigation.navigate('Certificate', { id: selected, nome: selectedName })}>
           <Text style={styles.buttonText}>Gerar Certificado</Text>
         </Pressable>
+
 
       </View>
 
