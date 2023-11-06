@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TextInput, StyleSheet, Image, Pressable, Platform, TouchableOpacity } from 'react-native';
+import { View, Text, Switch, TextInput, StyleSheet, Image, Pressable, Platform, TouchableOpacity } from 'react-native';
 import logoITEEM from './Login/imgITEEM.png'
 import { SelectList } from 'react-native-dropdown-select-list';
 import { db } from '../components/config';
@@ -23,20 +23,35 @@ export default function Avaliate(props) {
   const [relation, setRelation] = React.useState("");
   const [hability, setHability] = React.useState("");
   const [metas, setMetas] = React.useState("");
+  const [presente, setPresente] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  const toggleSwitch = () => {
+
+    if (isEnabled) {
+      setPresente(2);
+    } else {
+      setPresente(0);
+    }
+
+    setIsEnabled(previousState => !previousState)
+  }
 
 
 
   function createAvaliate() {
 
     // Add a new document in collection "cities"
-    setDoc(doc(db, "usuarios", id, "nota", date ), {
+    setDoc(doc(db, "usuarios", id, "nota", date), {
       coment: coment,
       date: date,
       participate: participate,
       relation: relation,
       hability: hability,
       metas: metas,
-      total: (Number(metas) + Number(hability) + Number(relation) + Number(participate))
+      presente: presente,
+      total: (Number(presente) + Number(metas) + Number(hability) + Number(relation) + Number(participate))
     });
 
 
@@ -246,11 +261,26 @@ export default function Avaliate(props) {
           </Pressable>
 
         )}
+<View style={{flexDirection: "row"}}>
+        <Text style={styles.cabecalhoSwitch}>
+          Presença
+        </Text>
+        <Switch
+          style={{ alignSelf: "flex-start", marginTop: 0, marginHorizontal: 0 }}
+          trackColor={{ false: 'grey', true: 'tomato' }}
+          thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
+          ios_backgroundColor={'grey'}
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+
+        />
+        </View>
 
       </View>
-
+      
 
       <View style={styles.bottomContainer}>
+      
 
         <Pressable style={styles.button} onPress={createAvaliate} >
           <Text style={styles.buttonText}>Enviar</Text>
@@ -281,32 +311,30 @@ const styles = StyleSheet.create({
 
   },
   bottomContainer: {
-    flex: 1,
+    flex: 0.7,
     justifyContent: "flex-end",
-    marginBottom: 10,
     width: "100%",
+    
 
   },
 
   topContainer: {
-    flex: 1,
-    backgroundColor: 'white',
+    flex: 1.5,
     justifyContent: "flex-start",
-    marginBottom: 25,
-    marginTop: 25,
+    alignItems:"center",
+    
     width: "100%"
 
   },
 
 
   midContainer: {
-    flex: 1,
-    backgroundColor: 'white',
+    flex: 3.5,
+    backgroundColor: '#00000000',
     justifyContent: "center",
-
     width: "100%",
-    marginBottom: 20,
-    marginTop: 50
+    
+    
 
   },
 
@@ -315,6 +343,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 225,
     alignSelf: 'center',
+    marginTop:30
 
   },
 
@@ -357,6 +386,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'gray',
     marginHorizontal: 40,
+    marginTop: 10
+
+  },
+
+  cabecalhoSwitch: {
+    fontSize: 15,
+    color: 'gray',
+    marginLeft: 40,
+    marginRight: 10,
     marginTop: 10
 
   },

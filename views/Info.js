@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Switch, ScrollView } from 'react-native';
 import logoITEEM from './Login/imgITEEM.png'
 import { SelectList } from 'react-native-dropdown-select-list';
 import { useRoute } from '@react-navigation/native';
@@ -16,6 +16,21 @@ export default function Info(props) {
   const [hability, setHability] = React.useState("");
   const [metas, setMetas] = React.useState("");
   const [coment, setComent] = useState("");
+  const [presente, setPresente] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  const toggleSwitch = () => {
+
+    if (presente == Number(2)) {
+      setIsEnabled(true);
+    } else {
+      setIsEnabled(false);
+    }
+
+    
+  }
+
 
   const route = useRoute();
   const id = route.params.id;
@@ -51,6 +66,8 @@ export default function Info(props) {
       setRelation(docSnap.data().relation)
       setHability(docSnap.data().hability)
       setMetas(docSnap.data().metas)
+      setPresente(docSnap.data().presente)
+
       
     } else {
       console.log("No such document!");
@@ -61,14 +78,15 @@ export default function Info(props) {
   }
 
   useEffect(() => {
-    takeInfo();
+    takeInfo().then(toggleSwitch());
+    
   }), [];
 
 
 
 
   return (
-
+    <ScrollView>
     <View style={styles.container}>
 
       <View style={styles.topContainer}>
@@ -157,8 +175,21 @@ export default function Info(props) {
           {coment}
         </Text>
 
-      </View>
+        <View style={{flexDirection: "row"}}>
+        <Text style={styles.cabecalhoSwitch}>
+          Presença
+        </Text>
+        <Switch
+          style={{ alignSelf: 'center' }}
+          trackColor={{ false: 'grey', true: 'tomato' }}
+          thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
+          ios_backgroundColor={'grey'}
+          value={isEnabled}
+          disabled={true}
+        />
 
+      </View>
+</View>
 
 
 
@@ -167,7 +198,7 @@ export default function Info(props) {
 
 
 
-
+    </ScrollView>
   );
 
 }
@@ -180,32 +211,31 @@ const styles = StyleSheet.create({
 
   },
   bottomContainer: {
-    flex: 1,
+    flex: 0.7,
     justifyContent: "flex-end",
-    marginBottom: 1,
     width: "100%",
+    
 
   },
 
   topContainer: {
-    flex: 1,
-    backgroundColor: 'white',
+    flex: 1.5,
     justifyContent: "flex-start",
-    marginBottom: 25,
-    marginTop: 25,
+    alignItems:"center",
+    
     width: "100%"
 
   },
 
 
   midContainer: {
-    flex: 1,
-    backgroundColor: 'white',
+    flex: 3.5,
+    backgroundColor: '#00000000',
     justifyContent: "center",
-
     width: "100%",
-    marginBottom: 130,
-
+    
+    
+    
 
   },
 
@@ -214,6 +244,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 225,
     alignSelf: 'center',
+    marginTop: 35
 
   },
 
@@ -256,6 +287,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'gray',
     marginHorizontal: 40,
+    marginTop: 10
+
+  },
+
+  cabecalhoSwitch: {
+    fontSize: 15,
+    color: 'gray',
+    marginLeft: 40,
+    marginRight: 10,
     marginTop: 10
 
   },
