@@ -11,7 +11,6 @@ import Info from "./views/Info.js";
 import Certificate from "./views/Certificate.js";
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebase_auth } from './components/config.jsx';
-import { User } from 'firebase/auth';
 
 
 
